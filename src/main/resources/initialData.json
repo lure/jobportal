@@ -34,9 +34,9 @@
             "login":"employer@employer.ru",
             "role":"EMPLOYER",
             "password":"123",
-            "firstName":"Романенко",
-            "middleName":"Виктор",
-            "lastName":"Юрьевич",
+            "firstName":"Виктор",
+            "middleName":"Юрьевич",
+            "lastName":"Романенко",
 
             "employer":{
                 "$ref":"employer",
@@ -53,9 +53,9 @@
             "login":"person@person.ru",
             "role":"PERSON",
             "password":"123",
-            "firstName":"Несторенко",
-            "middleName":"Михаил",
-            "lastName":"Петрович",
+            "firstName":"Михаил",
+            "middleName":"Петрович",
+            "lastName":"Несторенко",
 
             "person":{
                 "$ref":"person",
