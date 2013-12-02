@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<body>
+<wicket:panel>
+    <form method="post" action="#" name="login" class="search" wicket:id="signInForm">
+        <h2>вход <span>в систему &nbsp;</span></h2>
+        <label for="name">E-mail</label><input name="name" type="text" id="name" wicket:id="username" />
+        <label for="password">Пароль</label><input name="password" type="password" id="password" wicket:id="password"/>
+        <p class="register" wicket:id="registration">создать аккаунт</p>
+        <input name="login" type="submit" id="login" value="вход" title="Вход" class="submit" />
+    </form>
+    <div wicket:id="feedback" ></div>
+</wicket:panel>
+</body>
+</html>

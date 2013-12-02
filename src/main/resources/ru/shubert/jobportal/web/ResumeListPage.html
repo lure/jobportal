@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>JobPortal</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link type="text/css" href="/css/humanity/jquery-ui-1.8.20.custom.css" rel="stylesheet" />
+
+</head>
+<body>
+<div id="topNav">
+    <a href="#" title="Flash Web"><img src="/images/logo_text.gif" alt="Flash Web" width="179" height="35" border="0" /></a>
+    <ul>
+        <li wicket:id="myresume"><a href="/person" title="Мое резюме">РЕЗЮМЕ (МОЕ)</a></li>
+        <li wicket:id="myvacancy"><a href="/employer" title="Мои вакансии">ВАКАНСИИ (МОИ)</a></li>
+        <li wicket:id="allvacancy"><a href="/vacancy" title="Мои вакансии">ВАКАНСИИ</a></li>
+        <li class="fp">РЕЗЮМЕ</li>
+        <li><a href="/control" title="Настройки">НАСТРОЙКИ</a></li>
+        <span wicket:id="userPanel">[user panel here]</span>
+        <wicket:remove>
+            <li style="float:right; color: #777">user@jobportal.com</li>
+            <li style="float:right;"><a href="#" title="Выход">ВЫЙТИ</a></li>
+        </wicket:remove>
+    </ul>
+</div><div class="inner_copy"></div>
+<div id="body">
+    <div id="topShadow"></div>
+    <div id="bodyPannel">
+        <div id="midle" style="background: none; padding-top: 0px;">
+            <h2 style="border-bottom: 1px dashed #aaa;padding-left:10px;">Поиск <span>резюме</span></h2>
+
+            <form wicket:id="filter-form" action="#" method="get" class="contact">
+                <padding id="content" >
+                    <p><label>Компания</label><input type="text" wicket:id="employer" /></p>
+                    <p><label>Должность</label><input type="text" wicket:id="position" /></p>
+                    <p><label>Зарплата от	</label>
+                        <input type="text" wicket:id="salary"  value="50 000" style="width: 100px; text-align:right"/>
+                        <select wicket:id="currency" class="currency">
+                            <option value="rouble">руб.</option>
+                            <option value="dollar">$</option>
+                            <option value="dollar">&#8364;</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label>Образование</label>
+                        <select wicket:id="education[0].grade" name="education" class="search-education">
+                            <option value="empty" selected="selected"></option>
+                            <option value="none">Без образования</option>
+                            <option value="middle">Среднее</option>
+                            <option value="hight">Высшее</option>
+                        </select>
+                    </p>
+                </padding>
+                <input wicket:id="filter-button" style="clear:left; width: 90px; background: url('/images/more_bg.gif') no-repeat scroll 70px 0 #FFFFFF;" type="submit" class="submit"  value="показать"    title="Обновить фильтры" />
+                <input wicket:id="reset-button" class="reset" type="submit" title="Очистить" value="очистить">
+            </form>
+            <br />
+
+            <padding id="content" >
+                <table wicket:id="view">
+                    <tr>
+                        <th>Должность</th>
+                        <th>Компания</th>
+                        <th>Зарплата от</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>Менеджер по продажам</td>
+                        <td>Microsoft & Friends</td>
+                        <td>70 000р.</td>
+                        <td><a href="#">ПОСМОТРЕТЬ</a></td>
+                    </tr>
+                </table>
+            </padding>
+        </div>
+    </div>
+    <div id="bottomShadow"></div><br class="spacer" />
+</div>
+</body>
+</html>

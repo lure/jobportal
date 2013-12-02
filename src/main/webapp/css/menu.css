@@ -1,0 +1,56 @@
+/*++++++++++++++++++++++++++++++*/
+.menu.primary {
+    background: url("/images/menu/menu_bg.gif") repeat-x scroll 50% 0 #515151;
+    border-top: 1px solid #FFFFFF;
+    height: 80px;
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    width: 100%;
+}
+
+ul, ol {
+    list-style-position: outside;
+    text-align: left;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+    font-size: 90%;
+}
+
+.menu.primary li {
+    background: none repeat scroll 0 0 transparent;
+    display: table-row;
+    float: left;
+    height: 80px;
+    padding: 0;
+    position: relative;
+    vertical-align: middle;
+}
+
+.menu.primary li a.first_menu {
+    background: url("/images/menu/menu_start_triple.gif") no-repeat;
+    padding-left: 35px;
+}
+
+.menu.primary li a.last_menu, .menu.primary li a.last_menu_off {
+    background: url("/images/menu/menu_end_triple.gif") no-repeat right top;
+    padding-right: 35px;
+
+}
+
+.menu.primary li.last_menu, .menu.primary li.right_menu {
+    float: right;
+}
+
+.menu.primary li a {
+    color: white;
+    text-decoration: none;
+    background: url("/images/menu/menu_triple.gif") repeat-x scroll left top transparent;
+    display: table-cell;
+    font-size: 0.8em;
+    height: 80px;
+    line-height: normal;
+    padding: 0 10px;
+    text-transform: uppercase;
+    vertical-align: middle;
+}

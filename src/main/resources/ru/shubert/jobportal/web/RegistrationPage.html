@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>JobPortal</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+<body>
+<div id="topNav">
+    <a href="#" title="Flash Web"><img src="/images/logo_text.gif" alt="Flash Web" width="179" height="35" border="0"/></a>
+    <ul>
+        <wicket:link>
+        <li><a href="/home" title="main">ГЛАВНАЯ</a></li>
+        <li class="fp">РЕГИСТРАЦИЯ</li>
+        </wicket:link>
+    </ul>
+</div>
+<div class="inner_copy"></div>
+<div id="body">
+    <div id="topShadow"></div>
+    <div id="bodyPannel">
+
+        <div id="colorBg">
+            <div id="futurePlans">
+                <block name="common">
+                    <h2 class="text1">Ура! <span>У нас новенький!</span></h2>
+                    <pt>Сейчас мы вас быстро зарегистрируем!</pt>
+                    <ul>
+                        <li>Отыщите работающий e-mail.</li>
+                        <li>Придумайте пароль посложнее.</li>
+                        <li>И сразу предупредите нас, предлагаете ли вы работу или ищете её.</li>
+                    </ul>
+                    <pt>Нам нужно будет как-то обращаться к вам в письмах, да и другие участники захотят знать ваше имя,
+                        поэтому укажите какое-нибудь настоящее и цензурное. Спасибо.
+                    </pt>
+                    <br class="spacer"/>
+                </block>
+
+            </div>
+            <div id="contact" class="box">
+                <form method="post" action="#" name="newsletter" class="contact" wicket:id="form">
+                    <!-- Шаг 1 из 2 -->
+                    <block name="common">
+                        <h2 class="text3" style="width: 220px">Новый <span>участник &nbsp;</span></h2>
+                        <!-- E-mail, пароль и повторение пароля -->
+                        <label for="login">e-mail </label>
+                        <input name="login" type="text" id="login" class="text" wicket:id="login"/>
+
+                        <label for="password">пароль </label>
+                        <input name="password" type="password" id="password" class="text" wicket:id="password"/>
+
+                        <label for="password-confirmation">пароль <span>(еще раз)</span></label>
+                        <input name="password-confirmation" type="password" id="password-confirmation" class="text" wicket:id="password-confirmation"/>
+
+                        <label for="firstName">Имя </label>
+                        <input class="text" name="firstName" type="text" id="firstName" wicket:id="firstName"/>
+
+                        <label for="middleName">Отчество </label>
+                        <input class="text" name="middleName" type="text" id="middleName" wicket:id="middleName"/>
+
+                        <label for="lastName">Фамилия </label>
+                        <input class="text" name="lastName" type="text" id="lastName" wicket:id="lastName"/>
+
+                        <!-- Выбираем: Соискатель или Работодатель -->
+                        <block wicket:id="role">
+                        <label style="margin-left: 24px" for="person">соискатель
+                            <input type="radio" name="type" class="radio" id="person" title="Соискатель" value="person"
+                                   checked="checked" wicket:id="PERSON"/>
+                        </label>
+                        <!-- Разделитель -->
+                        <label style="clear: none; border-left: 1px solid #aaa;  height: 24px; margin-right: 10px;">
+                        &nbsp;</label>
+                        <label style="clear: none;" for="employer">работодатель
+                            <input type="radio" style="margin-right:0px;" name="type" class="radio" id="employer"
+                                   title="Работодатель" value="employer" wicket:id="EMPLOYER"/>
+                        </label>
+                        </block>
+
+                        <!-- Управление -->
+                        <input name="submit" type="submit" class="submit" value="далее" title="далее" wicket:id="save"/>
+                        <input name="reset" type="submit" class="reset" value="отмена" title="отменить" wicket:id="cancel"/>
+                    </block>
+
+                </form>
+                <br class="spacer"/>
+            </div>
+            <div wicket:id="feedback"></div>
+        </div>
+    </div>
+    <div id="bottomShadow"></div>
+    <br class="spacer"/>
+</div>
+</body>
+</html>

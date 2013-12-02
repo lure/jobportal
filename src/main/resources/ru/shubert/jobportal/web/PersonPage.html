@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>JobPortal</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js" ></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.8.20/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui-1.8.20.custom.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.ui.datepicker-ru.js"></script>
+    <link type="text/css" href="/css/humanity/jquery-ui-1.8.20.custom.css" rel="stylesheet" />
+    <script type="text/javascript">
+        // Конфигурация редактора
+        var step = 0; //На каком шаге регистрация
+
+        $(function() {
+            //noinspection JSPotentiallyInvalidConstructorUsage
+            new nicEditor({buttonList : [
+                'bold',
+                'italic',
+                'underline',
+                'left',
+                'center',
+                'right',
+                'justify',
+                'ol',
+                'ul',
+                'subscript',
+                'superscript',
+                'fontSize',
+                'fontFormat',
+                'link',
+                'unlink'
+            ]}).panelInstance('description');
+
+            $("#btn-edit").click( function(e) {
+                var view =$("#view");
+                view.toggle();
+                $("#edit").toggle();
+
+                if (view.css("display") != "none") {
+
+                } else {
+
+                }
+
+                e.stopPropagation();
+                return false;
+            });
+
+
+            $("#edit").find(".date").datepicker();
+        });
+
+
+    </script>
+</head>
+<body>
+<div id="topNav">
+    <a href="#" title="Flash Web"><img src="/images/logo_text.gif" alt="Flash Web" width="179" height="35" border="0" /></a>
+    <ul>
+        <li class="fp">РЕЗЮМЕ (МОЕ)</li>
+        <li wicket:id="myvacancy"><a href="/employer" title="Мои вакансии">ВАКАНСИИ (МОИ)</a></li>
+        <li wicket:id="allvacancy"><a href="/vacancy" title="Вакансии">ВАКАНСИИ</a></li>
+        <li wicket:id="allresume"><a href="/resume" title="Резюме">РЕЗЮМЕ</a></li>
+        <li><a href="/control" title="Настройки">НАСТРОЙКИ</a></li>
+        <span wicket:id="userPanel">[user panel here]</span>
+        <wicket:remove>
+            <li style="float:right; color: #777">user@jobportal.com</li>
+            <li style="float:right;"><a href="#" title="Выход">ВЫЙТИ</a></li>
+        </wicket:remove>
+    </ul>
+</div><div class="inner_copy"></div>
+<div id="body">
+<div id="topShadow"></div>
+<div id="bodyPannel">
+<div id="midle" style="background: none; padding-top: 0px;">
+<h2 style="border-bottom: 1px dashed #aaa;padding-left:10px;">Ваше <span>резюме</span>
+    <!-- Управление -->
+    <a href="#" id="btn-edit" title="Редактировать"><img class="navi"  src="/images/edit.png"  alt=""/></a>
+    <a href="#"  title="Искать подходящую вакансию."><img class="navi" src="/images/search.png"  alt=""/></a>
+    <!-- -->
+</h2>
+
+<!-- Просмотр -->
+<padding id="view" style="display: none" wicket:id="view-panel">
+    <p><label >ФИО			</label><span wicket:id="firstname">Иванов Петр Алексеевич</span></p>
+    <p><label >E-mail   		</label><a href="mailto:user@jobportal.com" wicket:id="login">user@jobportal.com</a></p>
+    <p><label >Адрес  	  	</label><span wicket:id="address">Москва, Ломоносовский проспект 31/7</span></p>
+    <br/>
+    <p><label >Должность		</label><span class="prof" wicket:id="position">Системный программист</span></p>
+    <p><label >Зарплата от	</label><span wicket:id="salary">50 000</span>&nbsp;<span wicket:id="currency"> руб.</span></p>
+    <br/>
+    <p><label class="title">Образование:	</label>&nbsp;</p>
+    <padding class="education" wicket:id="education">
+        <p><label>Степень:			</label><span wicket:id="grade">ВЫСШЕЕ</span></p>
+        <p><label>Специальность:	</label><span wicket:id="speciality">Прикладная математика и информатика</span></p>
+        <p><label>Организация:	</label><span wicket:id="place">Бобруйский сельско тракторный</span></p>
+        <p><label>Окончание:		</label><span wicket:id="end">2014 г.</span></p>
+        <br/>
+    </padding>
+    <p><label class="title">Стаж:			</label>&nbsp;</p>
+    <padding class="education" wicket:id="experiences">
+        <p><label>Компания:	</label><span wicket:id="company">TDS</span></p>
+        <p><label>Должность:	</label><span wicket:id="position">Программист проектировщик</span></p>
+        <p><label>Зарплата:	</label><span wicket:id="salary">45 000</span>&nbsp;<span wicket:id="currency"> руб.</span></p>
+        <p><label>Период:		</label><span wicket:id="period">16.04.2012 - 17.09.2012</span></p>
+    </padding>
+    <p><label class="title">О себе:			</label>&nbsp;</p>
+    <padding class="about" wicket:id="description">
+        <p>Пространно описание вакансии. Латинский текст набил оскомину, но ничего более внятного в голову не пришло</p>
+        <p>
+            Lorem ipsum dolor sit amet, consectetuer adipiscingelit.
+            Dolor lectus sollicitudineu, condimentum eu,tinciduntsit
+            Ametenim. Mauris nunc felis dignissi iddapibus nec,
+            Eorem ipsum dolor sit amet
+        </p>
+        <ul>
+            <li>Lorem ipsum dolor sit amet.</li>
+            <li>Dolor lectus sollicitudineu, condimentum eu.</li>
+            <li>Eorem ipsum dolor sit amet.</li>
+        </ul>
+        <br/>
+        <p>
+            Lorem ipsum dolor sit amet, consectetuer adipiscingelit.
+            Dolor lectus sollicitudineu, condimentum eu,tinciduntsit
+            Ametenim. Mauris nunc felis dignissi iddapibus nec,
+            Eorem ipsum dolor sit amet
+            Lorem ipsum dolor sit amet, consectetuer adipiscingelit.
+            Dolor lectus sollicitudineu, condimentum eu,tinciduntsit
+            Ametenim. Mauris nunc felis dignissi iddapibus nec,
+            Eorem ipsum dolor sit amet
+        </p>
+
+        <br />
+    </padding>
+</padding>
+
+<!-- Редактирование -->
+<block id="edit" style="display:block">
+    <div wicket:id="feedback"></div>
+    <form method="post" action="#" name="newsletter" class="contact" wicket:id="form">
+        <padding id="content">
+            <div wicket:id="feedbackContainer">
+            <p><label>Ищу работу	</label><input type="checkbox" name="available" id="available" checked="checked" wicket:id="available"/></p>
+            <p><label>Имя			</label><input type="text" name="firstname" id="firstname" value="Пётр" wicket:id="firstname"/></p>
+            <p><label>Отчество	</label><input type="text" name="midname"   id="midname"   value="Алексеевич" wicket:id="middlename"/></p>
+            <p><label>Фамилия		</label><input type="text" name="lastname"  id="lastname"  value="Иванов" wicket:id="lastname"/></p>
+            <p><label>Адрес  	  	</label><input type="text" name="address" id="address" value="Москва, Ломоносовский проспект 31/7" wicket:id="address"/></p>
+            <br/>
+            <p><label>Должность	</label><input type="text" name="position"  id="position"  value="Системный программист" wicket:id="position"/></p>
+            <p><label>Зарплата от	</label>
+                <input wicket:id="salary" type="text" name="salary" id="salary" value="50 000" style="width: 100px; text-align:right"/>
+                <select name="currency" id="currency" class="currency" wicket:id="currency">
+                    <option value="rouble">руб.</option>
+                    <option value="dollar">$</option>
+                    <option value="dollar">&#8364;</option>
+                </select>
+            </p>
+            <br />
+            <p class="title"><label >О себе:			</label>&nbsp;</p>
+            <textarea name="description" id="description" wicket:id="description"></textarea>
+            </div>
+            <br/>
+            <div wicket:id="education"></div>
+            <div wicket:id="experiences"></div>
+        </padding>
+
+        <!-- Управление формой -->
+        <div style="border-bottom: 1px dashed #aaa;padding-left:10px;">&nbsp;</div>
+        <div id="contact">
+            <br/>
+            <input wicket:id="save" style="clear:left; width: 90px; background: url('/images/more_bg.gif') no-repeat scroll 70px 0 #FFFFFF;"  type="submit" class="submit" value="сохранить"    title="Дальше" />
+            <input wicket:id="cancel"  type="submit"  class="reset"  value="очистить" title="Очистить" />
+        </div>
+    </form>
+</block>
+
+</div>
+
+</div>
+<div id="bottomShadow"></div><br class="spacer" />
+</div>
+</body>
+</html>

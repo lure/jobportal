@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Job Portal</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="topNav">
+    <a href="#" title="Flash Web"><img src="/images/logo_text.gif" alt="Flash Web" width="179" height="35" border="0" /></a>
+    <ul>
+        <li class="fp">ГЛАВНАЯ</li>
+        <li><a href="#" title="Регистрация" wicket:id="registrationMain">РЕГИСТРАЦИЯ</a></li>
+    </ul>
+</div><div class="inner_copy"></div>
+<div id="body">
+    <div id="topShadow"></div>
+
+    <div id="bodyPannel">
+        <span wicket:id="signInPanel"/>
+        <wicket:remove>
+        <form method="post" action="#" name="login" class="search">
+            <h2>вход <span>в систему &nbsp;</span></h2>
+            <label>E-mail</label><input name="name" type="text" id="name" />
+            <label>Пароль</label><input name="password" type="password" id="password" />
+            <p class="register" >создать аккаунт</p>
+            <span  />
+            <input name="login" type="submit" id="login" value="вход" title="Вход" class="submit" />
+        </form>
+        </wicket:remove>
+
+        <div id="eventLink">
+            <h2>Горячие <span>вакансии</span></h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscingelit.
+                Dolor lectus sollicitudineu, condimentum eu,tinciduntsit
+                Ametenim. Mauris nunc felis dignissi iddapibus nec,
+                Eorem ipsum dolor sit amet
+            </p>
+            <a href="#" title="read more" class="more">все вакансии</a>
+        </div><br class="spacer" />
+        <div id="midle">
+            <h2>Живи <span>ярче</span></h2>
+            <p>Flash Web is a free, tableless, W3C-compliant web design layout by Template World. This template has been tested and proven compatible with all major browser environments and operating systems. You are free to modify the design to suit your tastes in any way you like.</p>
+            <p>We only ask you to not remove "Design by Template World" and the link templateworld.com from the footer of the template.</p>
+            <a href="#" title="read more" class="more"  wicket:id="registrationBottom">Принять участие </a><br class="spacer" />
+        </div>
+
+    </div>
+    <div id="bottomShadow"></div><br class="spacer" />
+</div>
+</body>
+</html>
+

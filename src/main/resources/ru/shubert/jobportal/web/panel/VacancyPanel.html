@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--suppress ALL -->
+<wicket:panel>
+    <p><label>Должность </label><span wicket:id="position"></span></p>
+
+    <p><label>Образование </label><span wicket:id="education"></span></p>
+
+    <p><label>Зарплата от </label><span wicket:id="salary">50 000 </span>&nbsp;<span
+            wicket:id="currency">руб.</span></p>
+    <br/>
+
+    <p><label class="title">О должности: </label>&nbsp;</p>
+    <padding class="about">
+        <div wicket:id="description"></div>
+        <br/>
+    </padding>
+    <p class="title title-about" style="margin-bottom: 20px;"><label>О работодателе:</label>&nbsp;</p>
+    <block id="about-employer">
+        <p><label>Название компании</label><span
+                wicket:id="employer.name">Microsoft & Little pony</span></p>
+
+        <p><label>Сайт </label><a wicket:id="employer.url" href="#">http://microsoft.com</a></p>
+        <padding class="about about2">
+            <div wicket:id="employer.description"></div>
+            <br/>
+        </padding>
+    </block>
+</wicket:panel>

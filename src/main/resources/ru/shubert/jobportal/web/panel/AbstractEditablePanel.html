@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--suppress ALL -->
+<wicket:panel>
+    <p class="title"><label><wicket:message key="panel.title">Panel list title</wicket:message></label>
+        <a wicket:message="title:panel.add" href="#" wicket:id="add-panel"><img alt="add" src="/images/add.png" style="float: right;"/></a>
+    </p>
+    <padding class="education" wicket:id="panel-container">
+        <block wicket:id="panel" >  <!--id="staff-staffID"-->
+        <wicket:child>
+            - Panels goes here -
+        </wicket:child>
+        </block>
+    </padding>
+</wicket:panel>
+
+
+
+<!--
+<wicket:panel>
+    <a wicket:id="add-panel">Add panel </a>
+    <div wicket:id="panel-container">
+        <div wicket:id="panel">
+            <wicket:child>
+                - Panels goes here -
+            </wicket:child>
+        </div>
+    </div>
+</wicket:panel>
+-->

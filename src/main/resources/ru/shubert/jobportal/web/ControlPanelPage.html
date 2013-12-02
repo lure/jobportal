@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>JobPortal</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="topNav">
+    <a href="#" title="Flash Web"><img src="/images/logo_text.gif" alt="Flash Web" width="179" height="35" border="0" /></a>
+    <ul>
+        <li wicket:id="myresume"><a href="/person" title="Мое резюме">РЕЗЮМЕ (МОЕ)</a></li>
+        <li wicket:id="myvacancy"><a href="/employer" title="Мои вакансии">ВАКАНСИИ (МОИ)</a></li>
+        <li wicket:id="allvacancy"><a href="/vacancy" title="Вакансии">ВАКАНСИИ</a></li>
+        <li wicket:id="allresume"><a href="/resume" title="Резюме">РЕЗЮМЕ</a></li>
+        <li class="fp">НАСТРОЙКИ</li>
+        <span wicket:id="userPanel">[user panel here]</span>
+        <wicket:remove>
+            <li style="float:right; color: #777">user@jobportal.com</li>
+            <li style="float:right;"><a href="#" title="Выход">ВЫЙТИ</a></li>
+        </wicket:remove>
+    </ul>
+</div><div class="inner_copy"></div>
+<div id="body">
+    <div id="topShadow"></div>
+    <div id="bodyPannel">
+        <div id="midle" style="background: none; padding-top: 0px;">
+            <h2 style="border-bottom: 1px dashed #aaa;padding-left:10px;">Ваши <span>настройки</span></h2>
+
+            <form wicket:id="form" id="preferences" action="#" method="post" class="contact">
+                <padding id="content" >
+                    <div wicket:id="feedback"></div>
+                    <p><label>E-Mail</label><input wicket:id="login" type="text"/></p>
+                    <p><label>Имя</label><input wicket:id="firstName" type="text"/></p>
+                    <p><label>Фамилия</label><input wicket:id="middleName" type="text"/></p>
+                    <p><label>Отчество</label><input wicket:id="lastName" type="text"/></p>
+                    <br/>
+                </padding>
+                <input wicket:id="save" style="clear:left; width: 90px; background: url('/images/more_bg.gif') no-repeat scroll 70px 0 #FFFFFF;" type="submit" class="submit"  value="сохранить" title="Сохранить данные" />
+            </form>
+            <br />
+            <div style="border-bottom: 1px dashed #aaa;padding-left:10px;">&nbsp</div>
+            <br />
+            <form id="preferences-pswd" wicket:id="form-password" action="#" method="post" class="contact">
+                <padding id="content" class="pswds">
+                    <div wicket:id="feedback"></div>
+                    <p><label>Старый пароль</label><input wicket:id="password-check" type="password"/></p>
+                    <p><label>Новый пароль</label><input wicket:id="password" type="password"/></p>
+                    <p><label>Новый пароль <span>(еще раз)</span></label><input wicket:id="password-confirmation" type="password"/></p>
+                    <br/>
+                </padding>
+                <input wicket:id="save" style="clear:left; width: 90px; background: url('/images/more_bg.gif') no-repeat scroll 70px 0 #FFFFFF;" type="submit" class="submit"  value="сохранить" title="Сохранить данные" />
+            </form>
+            <br />
+            <br />
+            <br />
+        </div>
+
+    </div>
+    <div id="bottomShadow"></div><br class="spacer" />
+</div>
+
+</body>
+</html>

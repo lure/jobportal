@@ -1,0 +1,23 @@
+This is an education project made for a Java course.
+The main tasks was to show ORM and IoC concepts with some object oriented web-framework. Project contains separated
+branch with mongoDB backend, accessed via Spring-Data.
+Nearly all templates were found on Template World (http://templateworld.com).
+
+sampledataFlat.xml
+- Contains some account records among with job expirience. You're free to add some more records as long as '1' index
+still occupied by admin record.
+
+== General suggestion ==
+- It makes sence to populate HomePage.html with some more data just to make it more believable.
+- div with `wicket:id="feedback"` requires some particular css style.
+- There is nearly no unit tests. While it was intended to emphasize on TDD advantage I had no time to forestall code
+with tests.
+
+
+
+== Known bugs ==
+- All templates lack the correct html.
+- PersonPage marking breaks on empty fields
+- Editor has some huge problems and must be replaced with any robust analog.
+- description in a 'view' mode leaves some HTML tags unrendered.
+- Localization is undone and mostly russian consts mixed with English.

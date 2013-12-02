@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>JobPortal</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link type="text/css" href="/css/humanity/jquery-ui-1.8.20.custom.css" rel="stylesheet" />
+    <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.8.20/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui-1.8.20.custom.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.ui.datepicker-ru.js"></script>
+    <script type="text/javascript">
+        // Конфигурация редактора
+        var step = 0; //На каком шаге регистрация
+                $(function() {
+            new nicEditor({buttonList : [
+                'bold',
+                'italic',
+                'underline',
+                'left',
+                'center',
+                'right',
+                'justify',
+                'ol',
+                'ul',
+                'subscript',
+                'superscript',
+                'fontSize',
+                'fontFormat',
+                'link',
+                'unlink'
+            ]}).panelInstance('description');
+
+            $("#btn-edit").click( function(e) {
+                $("#view").toggle();
+                $("#edit").toggle();
+
+                if ($("#view").css("display") != "none") {
+
+                } else {
+
+                }
+
+                e.stopPropagation();
+                return false;
+            });
+
+
+            $( "#edit .date" ).datepicker();
+        });
+
+
+    </script>
+</head>
+<body>
+<div id="topNav">
+    <a href="#" title="Flash Web"><img src="/images/logo_text.gif" alt="Flash Web" width="179" height="35" border="0" /></a>
+    <ul>
+        <li class="fp">ВАКАНСИИ (МОИ)</li>
+        <li wicket:id="myresume"><a href="/person" title="Мое резюме">РЕЗЮМЕ (МОЕ)</a></li>
+        <li wicket:id="allvacancy"><a href="/vacancy" title="Вакансии">ВАКАНСИИ</a></li>
+        <li wicket:id="allresume"><a href="/resume" title="Резюме">РЕЗЮМЕ</a></li>
+        <li><a href="/control" title="Настройки">НАСТРОЙКИ</a></li>
+        <span wicket:id="userPanel">[user panel here]</span>
+        <wicket:remove>
+            <li style="float:right; color: #777">user@jobportal.com</li>
+            <li style="float:right;"><a href="#" title="Выход">ВЫЙТИ</a></li>
+        </wicket:remove>
+    </ul>
+</div><div class="inner_copy"></div>
+<div id="body">
+    <div id="topShadow"></div>
+    <div id="bodyPannel">
+        <div id="midle" style="background: none; padding-top: 0px;">
+
+            <!-- Редактирование -->
+            <h2 style="border-bottom: 1px dashed #aaa;padding-left:10px;">Ваши <span>вакансии</span></h2>
+            <block id="edit" style="display:block">
+                <div wicket:id="feedback"></div>
+                <form method="post" action="#"wicket:id="form" class="contact">
+                    <padding id="content" class="empldescr">
+                        <p><label>Название компании</label><input wicket:id="name" type="text" value="OOO СигмаТор"/></p>
+                        <p><label>Сайт			 </label><input wicket:id="url" type="text" value="http://sigma.org" /></p>
+                        <p class="title title-about"><label >О НАС:</label>&nbsp;</p>
+                        <textarea  wicket:id="description" class="description-employer"  name="description" id="description"></textarea>
+                    </padding>
+                    <padding>
+                        <!-- Управление формой -->
+                        <div style="border-bottom: 1px dashed #aaa;padding-left:10px;">&nbsp;</div>
+                        <div id="contact">
+                            <br/>
+                            <input wicket:id="save" style="clear:left; width: 90px; background: url('/images/more_bg.gif') no-repeat scroll 70px 0 #FFFFFF;" type="submit" class="submit" value="сохранить"  title="Дальше" />
+                            <input wicket:id="cancel" type="submit"  class="reset" value="очистить" title="Очистить" />
+                        </div>
+                    </padding>
+                </form>
+                <br /> <br />
+                <padding id="content">
+                    <p class="title title-about"><label>Вакансии:</label>
+                        <a wicket:id="add-vacancy-link" title="Добавить вакансию" href="#"><img alt="add vacancy" src="/images/add.png" style="float: right;"/></a>
+                    </p>
+                    <padding class="education">
+                    </padding>
+                </padding>
+                <div wicket:id="vFeedbackPanel"></div>
+                <padding id="content" >
+                    <table style="width:665px">
+                        <tr>
+                            <th>Должность</th>
+                            <th>Зарплата от</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tbody wicket:id="viewContainer">
+                        <tr wicket:id="vacancies">
+                            <td wicket:id="position">Менеджер по продажам</td>
+                            <td><span wicket:id="salary">70 000</span>&nbsp;<span wicket:id="currency">р.</span></td>
+                            <td style="text-align:center"><a href="#" wicket:id="edit">РЕДАКТИРОВАТЬ</a></td>
+                            <td style="text-align:center"><a href="#" wicket:id="delete">УДАЛИТЬ</a></td>
+                            <td style="text-align:center"><a href="#" wicket:id="search">НАЙТИ КАНДИДАТА</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </padding>
+                <div style="height: 40px">&nbsp;</div>
+            </block>
+
+        </div>
+
+    </div>
+    <div id="bottomShadow"></div><br class="spacer" />
+</div>
+<!--modal ajax window-->
+<div style="display: none;" wicket:id="entity-confirmation"></div>
+<div style="display: none;" wicket:id="complex-modal-window"></div>
+</body>
+</html>

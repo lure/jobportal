@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--suppress ALL -->
+<wicket:extend>
+        <p><label>Компания: </label><input type="text" name="company" value="" wicket:id="company"/></p>
+
+        <p><label>Должность:</label><input type="text" name="position" value="" wicket:id="position"/></p>
+
+        <p><label>Период: </label>
+            <input wicket:id="start" type="text" name="start" class="date" value=""/> &#8212;
+            <input wicket:id="end" type="text" name="end" class="date" value="" />
+        </p>
+
+        <p><label>Зарплата: </label>
+            <input type="text" name="salary" value="" style="width: 100px; text-align:right" wicket:id="salary"/>
+            <select name="currency" class="currency" wicket:id="currency">
+                <option value="rouble">руб.</option>
+                <option value="dollar">$</option>
+                <option value="euro">&#8364;</option>
+            </select>
+        </p>
+        <a href="#" title="Удалить запись об образовании" wicket:id="remove-panel"><img alt="delete" class="delete"
+                                                                           src="/images/delete.png"/></a>
+
+        <div wicket:id="feedback"></div>
+</wicket:extend>

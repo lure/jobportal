@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--suppress ALL -->
+<wicket:panel>
+    <block id="edit">
+        <div wicket:id="feedback"></div>
+        <form wicket:id="form" method="post" action="#" name="newsletter" class="contact">
+            <padding id="content" >
+                <p><label>Должность	</label><input wicket:id="position" type="text" name="firstname" id="firstname" value="Пётр Алексеевич"/></p>
+                <p><label>Образование:</label>
+                    <select wicket:id="education" name="grade" class="grade2">
+                        <option value="specialist" selected="selected">СПЕЦИАЛИСТ</option>
+                        <option value="magister">МАГИСТР</option>
+                        <option value="doctor">ДОКТОР</option>
+                    </select>
+                </p>
+                <p><label>Зарплата от: </label>
+                    <input wicket:id="salary" type="text" name="salary" value="50 000" style="width: 100px; text-align:right"/>
+                    <select wicket:id="currency" name="currency"  class="currency">
+                        <option value="rouble">руб.</option>
+                        <option value="dollar">$</option>
+                        <option value="dollar">&#8364;</option>
+                    </select>
+                </p>
+
+                <br/>
+
+                <p class="title title-about"><label >Описание:</label>&nbsp;</p>
+                <textarea wicket:id="description" id="vacdescription" cols="50" rows="5"></textarea>
+            </padding>
+
+            <!-- Управление формой -->
+            <div style="border-bottom: 1px dashed #aaa;padding-left:10px;">&nbsp;</div>
+            <div id="contact">
+                <br/>
+                <input wicket:id="save" style="clear:left; width: 90px; background: url('/images/more_bg.gif') no-repeat scroll 70px 0 #FFFFFF;" type="submit" class="submit" value="сохранить" title="Дальше" />
+                <input wicket:id="cancel"  type="submit"  class="reset"   value="Отмена" title="Отмена" />
+            </div>
+        </form>
+    </block>
+
+<script type="text/javascript">
+    new nicEditor({buttonList : [
+        'bold',
+        'italic',
+        'underline',
+        'left',
+        'center',
+        'right',
+        'justify',
+        'ol',
+        'ul',
+        'subscript',
+        'superscript',
+        'fontSize',
+        'fontFormat',
+        'link',
+        'unlink'
+    ]}).panelInstance('vacdescription');
+
+</script>
+ </wicket:panel>

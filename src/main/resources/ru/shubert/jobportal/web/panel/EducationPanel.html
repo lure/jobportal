@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--suppress ALL -->
+<wicket:extend>
+    <p><label>Степень:			</label>
+        <select name="grade" class="grade" wicket:id="grade">
+            <option value="specialist" selected="selected">СПЕЦИАЛИСТ</option>
+            <option value="magister">МАГИСТР</option>
+            <option value="doctor">ДОКТОР</option>
+        </select>
+    </p>
+    <p><label>Специальность:	</label><input type="text" name="speciality"   value="" wicket:id="speciality"/></p>
+    <p><label>Организация:		</label><input type="text" name="place"        value="" wicket:id="place"/></p>
+    <p><label>Окончание:		</label><input type="text" name="end"          value="" style="width: 50px;" wicket:id="end"/> г.</p>
+    <a href="#" title="Удалить запись об образовании" wicket:id="remove-panel"><img alt="delete" class="delete" src="/images/delete.png" /></a>
+    <div wicket:id="feedback"></div>
+</wicket:extend>

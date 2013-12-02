@@ -1,0 +1,139 @@
+body {
+    font-family: Tahoma, serif;
+    font-size: 1em;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+form {
+    margin: 0;
+}
+
+h1 {
+    color: #7d95a7;
+    font-size: 1.3em;
+}
+
+.roleslist {
+    width: 1000px;
+}
+
+.roleslist td, .roleslist th {
+    border: 1px solid #7d95a7;
+    padding: 4px;
+    font-size: 0.8em
+}
+
+.roleslist td {
+    background: #f6fafe;
+}
+
+.roleslist th {
+    background: #c4e5ff;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.roleslist a {
+    color: #003863;
+    font-size: 0.9em;
+}
+
+.pager {
+    margin: 10px 0;
+    font-size: 0.7em;
+}
+
+.pager span {
+    font-weight: bold;
+    color: #7d95a7;
+}
+
+.pager a {
+    color: #003863;
+}
+
+.editrole {
+    width: 592px;
+    background: #f6fafe;
+    border: 1px solid #7d95a7;
+    padding: 4px;
+}
+
+.editrole .name {
+    width: 400px;
+}
+
+.editrole .permissions {
+    margin: 10px 0 10px 50px;
+    font-size: 0.8em;
+}
+
+.editrole .permissions .section {
+    margin: 0 0 10px 0;
+}
+
+.editrole .permissions span {
+    font-style: italic;
+    display: block;
+}
+
+.editrole .permissions label {
+    margin-right: 10px;
+}
+
+div.feedback ul li {
+    width: 99%;
+    padding: 3px;
+    border: 1px solid #c3c4c1;
+    background-color: #f0ffef;
+    color: black;
+    margin-bottom: 15px;
+}
+
+div.feedback ul {
+    margin: 0;
+    padding-top: 10px;
+    list-style: none;
+}
+
+table.grid {
+	margin-bottom: 10px;
+	border-bottom: 1px solid #0079d6;
+	font-size: 1em;
+	font-family: arial;
+	width: 100%;
+	}
+
+
+table.grid tr { padding-top: 2px; padding-bottom: 2px; }
+table.grid tr.odd { background-color: #EFFFCD; }
+table.grid tr.even { background-color: #fff; }
+table.grid tr td { padding-left: 8px; padding-right: 30px; }
+
+
+/* NAVIGATION */
+table.grid tr.navigation { text-align: left; font-size: 0.8em;}
+table.grid tr.navigation td { padding-right: 0px;}
+
+
+/* HEADERS */
+table.grid tr th { font-weight: normal; padding-top: 3px; padding-bottom: 3px; padding-left: 8px; padding-right: 24px; background-color: #c1e4ff; border-bottom: 1px solid #0079d6; border-top: 1px solid #0079d6; text-align: left; white-space: nowrap; vertical-align: middle;}
+table.grid tr th a { padding-right: 15px; background-position: right; background-repeat:no-repeat; }
+table.grid tr th.wicket_orderDown a { color:black; background-image: url(/images/table/arrow_down.png); }
+table.grid tr th.wicket_orderUp a { color: black; background-image: url(/images/table/arrow_up.png); }
+table.grid tr th.wicket_orderNone a {
+	background-image: url(/images/table/arrow_off.png);
+}
+table.grid tr th a { font-weight: normal; }
+
+
+/* FILTERS */
+table.grid td.filter-td { font-size: 1em; background-color: #c1e4ff; border-bottom: 1px solid #0079d6; }
+table.grid td.filter-td input.go { width: 45%; }
+table.grid td.filter-td input.clear { width: 45%; }
+table.grid td.filter-td input { width: 100%; font-size: 0.6em; }
+table.grid td.filter-td select { width: 100%; font-size: 0.6em; }
+div.date-filter-search input{ width:auto !important; }

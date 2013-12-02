@@ -1,0 +1,6 @@
+target/*
+.idea/*
+jobportal.iml
+src/main/java/Test.java
+.gradle/*
+build/*

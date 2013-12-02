@@ -1,0 +1,79 @@
+.primary {
+    clear: none;
+    float: left;
+    width: 50%;
+}
+
+.featured {
+    -moz-border-radius: 5px 5px 5px 5px;
+    background-color: #B5D9E5;
+    border: 4px solid #B5D9E5;
+    clear: both;
+    margin-top: 10px;
+}
+
+.object-lead {
+    background: url("/images/user/listing-item.png") repeat-x left bottom;
+    margin: 0;
+    padding: 1em;
+    position: relative;
+}
+
+.featured-inner {
+    -moz-border-radius: 3px 3px 3px 3px;
+    background-color: #FFFFFF;
+    border: 1px solid #2E5186;
+}
+
+p, ul, ol, dl, address, table, pre, form, fieldset {
+    margin-bottom: 1.5em;
+}
+
+fieldset {
+    border-color: -moz-use-text-color -moz-use-text-color #A4CFDE;
+    border-style: none none dotted;
+    border-width: 1px;
+    padding: 0 1.5em 1em;
+    margin: 1em 0 1.5em;
+}
+
+fieldset ol, fieldset ul, .html-rtl fieldset ol, .html-rtl fieldset ul {
+    list-style: none outside none;
+    margin: 0;
+}
+
+fieldset li {
+    margin-bottom: 0.5em;
+}
+
+.user-input input[type="text"], .user-input input[type="password"] {
+    width: 310px;
+}
+
+input[type="text"], input[type="password"], select, textarea {
+    border: 1px solid #5875A0;
+    color: #666666;
+    padding: 2px 5px;
+    font-family: "helvetica neue", arial, helvetica, sans-serif;
+
+}
+
+input, textarea, select, button {
+    line-height: inherit;
+}
+
+.user-input label {
+    display: block;
+    width: 320px;
+    font-family: "helvetica neue", arial, helvetica, sans-serif;
+    color: #444444;
+    font-size: 13px;
+}
+
+label {
+    cursor: pointer;
+    font-weight: bold;
+}
+.styled label{
+    display:inline;
+}
