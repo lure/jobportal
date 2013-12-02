@@ -1,4 +1,4 @@
-package ru.shubert.jobportal.model.prototype;
+package ru.shubert.jobportal.model;
 
 /**
  * Alternative role system, using finite set of string constants
@@ -12,8 +12,5 @@ package ru.shubert.jobportal.model.prototype;
 public enum RoleEnum {
     PERSON,
     EMPLOYER,
-    ADMIN;
-
-
-    private static final long serialVersionUID = 7096630990899203501L;
+    ADMIN
 }

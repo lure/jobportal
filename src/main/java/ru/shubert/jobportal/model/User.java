@@ -2,12 +2,13 @@ package ru.shubert.jobportal.model;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 import ru.shubert.jobportal.model.employer.Employer;
 import ru.shubert.jobportal.model.person.Person;
-import ru.shubert.jobportal.model.prototype.AbstractEntity;
-import ru.shubert.jobportal.model.prototype.RoleEnum;
 
-import javax.persistence.*;
 import java.util.EnumSet;
 
 
@@ -28,42 +29,41 @@ import java.util.EnumSet;
  * information
  */
 
-@Entity
+@Document
 public class User extends AbstractEntity {
 
-    @Column(length = SHORT_STRING, unique = true, nullable = false)
+    @Indexed(unique = true)
     private String login;
 
-    @Column(length = SHORT_STRING, nullable = false)
     private String password;
 
-    @Column(length = MEDIUM_STRING, nullable = true)
     private String loginToken;
 
-    @Enumerated(EnumType.STRING)
     private RoleEnum role = RoleEnum.PERSON;
 
-    @Column(length = SHORT_STRING)
     private String firstName;
 
-    @Column(length = SHORT_STRING)
     private String middleName;
 
-    @Column(length = SHORT_STRING)
     private String lastName;
 
-    @SuppressWarnings("JpaDataSourceORMInspection")
-    @OneToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="EMP_FK")
+    @DBRef
     private Employer employer;
 
-    @SuppressWarnings("JpaDataSourceORMInspection")
-    @OneToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="PERS_FK")
+    @DBRef
     private Person person;
 
 
     /* FUNCTIONS */
+
+    public User() {
+    }
+
+    @PersistenceConstructor
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
 
     public String getLoginToken() {
         return loginToken;

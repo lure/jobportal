@@ -5,9 +5,7 @@ package ru.shubert.jobportal.model;
  * Date: 29.04.12 16:56
  */
 public enum Currency {
-
     rouble,
     dollar,
     euro
-
 }

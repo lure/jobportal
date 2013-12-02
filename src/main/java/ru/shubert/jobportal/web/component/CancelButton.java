@@ -1,13 +1,10 @@
 package ru.shubert.jobportal.web.component;
 
-import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.util.collections.MicroMap;
 import org.apache.wicket.util.string.interpolator.MapVariableInterpolator;
-import ru.shubert.jobportal.strategy.ORMHelper;
 import ru.shubert.jobportal.web.HomePage;
-import ru.shubert.jobportal.web.proto.BasePage;
 
 import java.util.Map;
 
@@ -31,7 +28,7 @@ public class CancelButton extends Button {
     public void onSubmit() {
         // Is it really wicket way? TODO revisit message interpolation
         String info = getString("status.cancel");
-        Map map = new MicroMap<>("name",  getString(ORMHelper.getClass(getForm().getModelObject()).getName()));
+        Map map = new MicroMap<>("name",  getString(getForm().getModelObject().getClass().getName()));
         getSession().info(MapVariableInterpolator.interpolate(info, map));
         setResponsePage(HomePage.class);
 

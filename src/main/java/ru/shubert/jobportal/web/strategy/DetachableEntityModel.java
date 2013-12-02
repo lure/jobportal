@@ -2,23 +2,22 @@ package ru.shubert.jobportal.web.strategy;
 
 
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.bson.types.ObjectId;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import ru.shubert.jobportal.model.prototype.IEntity;
+import ru.shubert.jobportal.model.AbstractEntity;
 import ru.shubert.jobportal.service.IService;
-import java.io.Serializable;
 
 /**
- * refreshing. Refreshing used to return object for printing, editing etc.
- * Depends no on any particular {@link ru.shubert.jobportal.service.IService} or {@link ru.shubert.jobportal.model.prototype.IEntity}
- * implementations
+ *
+ *
  */
 public class DetachableEntityModel<T> extends LoadableDetachableModel<T> {
 
     private static final Long serialVersionUID = 1L;
 
     private IService service;
-    private Serializable id;
+    private ObjectId id;
     private Class<T> tClass;
 
     public DetachableEntityModel(IService service) {
@@ -37,7 +36,7 @@ public class DetachableEntityModel<T> extends LoadableDetachableModel<T> {
      */
     @Override
     protected T load() {
-        return (tClass == null || id == null) ? null : service.get(tClass, id);
+        return (tClass == null || id == null) ? null : service.findOne(id, tClass);
     }
 
     /**
@@ -53,7 +52,7 @@ public class DetachableEntityModel<T> extends LoadableDetachableModel<T> {
     public void setObject(@Nullable T object) {
         super.setObject(object);
         if (object != null) {
-            id = ((IEntity) object).getId();
+            id = ((AbstractEntity) object).getId();
             tClass = (Class<T>) object.getClass();
         } else {
             tClass = null;

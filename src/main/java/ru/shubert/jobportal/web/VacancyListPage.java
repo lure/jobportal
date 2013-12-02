@@ -15,7 +15,7 @@ import org.apache.wicket.util.lang.WicketObjects;
 import ru.shubert.jobportal.model.Currency;
 import ru.shubert.jobportal.model.employer.Employer;
 import ru.shubert.jobportal.model.employer.Vacancy;
-import ru.shubert.jobportal.service.IAccountService;
+import ru.shubert.jobportal.service.IService;
 import ru.shubert.jobportal.web.component.BookmarkableItemLink;
 import ru.shubert.jobportal.web.panel.UserPanel;
 import ru.shubert.jobportal.web.proto.BasePage;
@@ -28,8 +28,8 @@ import java.util.List;
 public class VacancyListPage extends BasePage {
     private Object originalState;
 
-    @SpringBean
-    IAccountService service;
+    @SpringBean(name="baseService")
+    IService service;
 
     // HTML table with list of entityes
     private DataTable<Vacancy> view;

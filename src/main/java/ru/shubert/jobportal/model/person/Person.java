@@ -1,12 +1,13 @@
 package ru.shubert.jobportal.model.person;
 
 
-import org.hibernate.annotations.IndexColumn;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import ru.shubert.jobportal.model.AbstractEntity;
 import ru.shubert.jobportal.model.Currency;
 import ru.shubert.jobportal.model.User;
-import ru.shubert.jobportal.model.prototype.AbstractEntity;
 
-import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,40 +16,27 @@ import java.util.List;
  * Specifying explicit joincolumn makes every Education or Expirience object directly know where their
  * master is
  */
-@Entity
-public class Person extends AbstractEntity {
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "person")
-    User user;
+@Document
+public class Person extends AbstractEntity{
+
+    @Transient
+    private User user;
 
     // does he look for a job
     private Boolean available;
 
-    @Column(length = LONG_STRING)
     private String position;
 
     private Integer salary;
 
-    @Enumerated(value = EnumType.STRING)
     private Currency currency;
 
-    @Column(length = 2048)
     private String address;
 
-    // schema is built by hibernate and for h2 database there are no way to determine column presence since h2 operates in memory
-    @SuppressWarnings("JpaDataSourceORMInspection")
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-    @OrderColumn(name="list_order")
-    @JoinColumn(name="person_id")
     private List<Education> education;
 
-    // schema is built by hibernate and for h2 database there are no way to determine column presence since h2 operates in memory
-    @SuppressWarnings("JpaDataSourceORMInspection")
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-    @OrderColumn(name="list_order")
-    @JoinColumn(name="person_id")
     private List<JobExperience> experiences;
 
-    @Column(length = 2048)
     private String description;
 
     public Boolean getAvailable() {
@@ -105,14 +93,6 @@ public class Person extends AbstractEntity {
         this.experiences = experiences;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -127,5 +107,13 @@ public class Person extends AbstractEntity {
 
     public void setCurrency(final Currency currency) {
         this.currency = currency;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

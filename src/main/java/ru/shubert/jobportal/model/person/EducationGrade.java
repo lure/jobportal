@@ -5,7 +5,6 @@ package ru.shubert.jobportal.model.person;
  * Date: 29.04.12 16:24
  */
 public enum EducationGrade {
-
     none,
     middle,
     high,
@@ -13,6 +12,4 @@ public enum EducationGrade {
     magister,
     doctor,
     academician
-
-
 }

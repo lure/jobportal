@@ -1,13 +1,15 @@
 package ru.shubert.jobportal.config;
 
 import org.apache.wicket.protocol.http.WicketFilter;
-import org.springframework.orm.hibernate4.support.OpenSessionInViewFilter;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
-import javax.servlet.*;
+import javax.servlet.DispatcherType;
+import javax.servlet.FilterRegistration;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import java.util.EnumSet;
 
 /**
@@ -49,9 +51,7 @@ public class WebConfig implements WebApplicationInitializer {
         sc.setAttribute("org.mortbay.jetty.servlet.SessionURL", "none");
 
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        //context.scan("ru.shubert.jobportal.config");
-        //context.getEnvironment().setDefaultProfiles("embedded");
-        context.register(AppConfig.class);
+        context.register(AppConfig.class, MongoConfig.class);
         context.refresh();
         sc.addListener(new ContextLoaderListener(context));
 
@@ -62,21 +62,10 @@ public class WebConfig implements WebApplicationInitializer {
         charsetFilter.setInitParameter("forceEncoding","true");
         charsetFilter.addMappingForUrlPatterns(null, false, "/*");
 
-
-        // Open Session in view
-        FilterRegistration.Dynamic osivFilter = sc.addFilter("osiv", OpenSessionInViewFilter.class);
-        osivFilter.addMappingForUrlPatterns(null, false, "/*");
-
         // Wicket itself
         FilterRegistration.Dynamic wicketFilter = sc.addFilter("wicketFilter", WicketFilter.class);
         wicketFilter.setInitParameter(WicketFilter.FILTER_MAPPING_PARAM, "/*");
         wicketFilter.setInitParameter("applicationFactoryClassName","org.apache.wicket.spring.SpringWebApplicationFactory");
         wicketFilter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.ERROR), true, "/*");
-
-        ServletRegistration.Dynamic h2Servlet = sc.addServlet("H2Console", org.h2.server.web.WebServlet.class);
-        h2Servlet.setInitParameter("webAllowOthers", "true");
-        h2Servlet.setLoadOnStartup(2);
-        h2Servlet.addMapping("/admin/h2/*");
-
     }
 }

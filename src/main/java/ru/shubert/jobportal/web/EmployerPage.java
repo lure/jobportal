@@ -18,10 +18,10 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator;
-import ru.shubert.jobportal.model.User;
+import org.bson.types.ObjectId;
 import ru.shubert.jobportal.model.employer.Employer;
 import ru.shubert.jobportal.model.employer.Vacancy;
-import ru.shubert.jobportal.service.IAccountService;
+import ru.shubert.jobportal.service.IService;
 import ru.shubert.jobportal.web.component.*;
 import ru.shubert.jobportal.web.panel.UserPanel;
 import ru.shubert.jobportal.web.panel.VacancyModalPanel;
@@ -45,8 +45,9 @@ public class EmployerPage extends BasePage {
     private ComplexModalWindow<Vacancy> vacancyWindow;
 
 
-    @SpringBean
-    protected IAccountService service;
+    @SpringBean(name="baseService")
+    protected IService employerService;
+
 
     @SuppressWarnings({"UnusedDeclaration"})
     public EmployerPage() {
@@ -57,14 +58,18 @@ public class EmployerPage extends BasePage {
     @Override
     public void onInitialize() {
         super.onInitialize();
-        final User user = service.get(User.class, JobPortalSession.get().getUser().getId());
-        final IModel<Employer> formModel = new CompoundPropertyModel<>(user.getEmployer());
+
+        ObjectId empId = JobPortalSession.get().getUser().getEmployer().getId();
+        final IModel<Employer> formModel = new CompoundPropertyModel<>(employerService.findOne(empId, Employer.class));
         setDefaultModel(formModel);
         Form<Employer> form = new Form<Employer>("form", formModel) {
             @Override
             protected void onSubmit() {
                 super.onSubmit();
-                service.save(getModelObject());
+                for(Vacancy v :getModelObject().getVacancies()){
+                    employerService.save(v);
+                }
+                employerService.save(getModelObject());
                 getSession().info(getString("status.save", getModel()));
                 setResponsePage(HomePage.class);
             }
@@ -112,7 +117,7 @@ public class EmployerPage extends BasePage {
                     if (!v.isPersisted()) {
                         e.getVacancies().add(v);
                     }
-                    service.save(v);
+                    employerService.save(v);
                     target.add(vFeedbackPanel, body);
                 }
             }
@@ -177,7 +182,7 @@ public class EmployerPage extends BasePage {
             public void onClose(AjaxRequestTarget target) {
                 if (confirmationAnswer.isConfirmed()) {
                     if (itemToDelete != null) {
-                        service.delete(itemToDelete);
+                        employerService.delete(itemToDelete);
                         ((Employer) getDefaultModelObject()).getVacancies().remove(itemToDelete);
                     }
                     target.add(body);

@@ -1,10 +1,11 @@
 package ru.shubert.jobportal.model.employer;
 
-import org.hibernate.annotations.LazyToOne;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import ru.shubert.jobportal.model.AbstractEntity;
 import ru.shubert.jobportal.model.User;
-import ru.shubert.jobportal.model.prototype.AbstractEntity;
 
-import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,23 +14,19 @@ import java.util.List;
  * Holds list of {@link Vacancy} objects and information about company itself.
  * Linked with User using foreign key without join table
  */
-
-@Entity
+@Document
 public class Employer extends AbstractEntity {
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "employer")
-    User user;
+    @Transient
+    private User user;
 
-    @Column(length = LONG_STRING)
     private String name;
 
-    @Column(length = LONG_STRING)
     private String url;
 
-    @Column(length = 2048)
     private String description;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "employer", fetch = FetchType.LAZY)
+    @DBRef
     private List<Vacancy> vacancies = new LinkedList<>();
 
     public Employer() {
@@ -74,4 +71,5 @@ public class Employer extends AbstractEntity {
     public void setUser(User user) {
         this.user = user;
     }
+
 }

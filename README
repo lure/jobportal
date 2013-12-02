@@ -16,8 +16,16 @@ with tests.
 
 
 == Known bugs ==
+- search pages does not display: for 'resume page' surname and for 'vacancy page' company
+- test must be provided, but take into account, that dataSeeder has the same problem as described here  http://hints.macworld.com/article.php?story=20050208053951714
 - All templates lack the correct html.
 - PersonPage marking breaks on empty fields
 - Editor has some huge problems and must be replaced with any robust analog.
 - description in a 'view' mode leaves some HTML tags unrendered.
 - Localization is undone and mostly russian consts mixed with English.
+
+== future reading ==
+https://github.com/lordofthejars/nosql-unit
+https://github.com/thiloplanz/jmockmongo
+https://github.com/flapdoodle-oss/embedmongo.flapdoodle.de
+https://github.com/joelittlejohn/embedmongo-maven-plugin

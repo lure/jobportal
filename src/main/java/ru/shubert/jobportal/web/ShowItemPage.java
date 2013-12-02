@@ -7,11 +7,12 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.shubert.jobportal.model.employer.Vacancy;
 import ru.shubert.jobportal.model.person.Person;
-import ru.shubert.jobportal.service.IAccountService;
+import ru.shubert.jobportal.service.IService;
 import ru.shubert.jobportal.web.panel.PersonPanel;
 import ru.shubert.jobportal.web.panel.UserPanel;
 import ru.shubert.jobportal.web.panel.VacancyPanel;
@@ -33,10 +34,11 @@ public class ShowItemPage extends BasePage {
         resume
     }
 
-    @SpringBean
-    private IAccountService service;
+    @SpringBean(name="baseService")
+    private IService service;
+
     private ItemType item;  // item type to be shown
-    private Long id;        // item id to be loaded from persistence storage
+    private ObjectId id;        // item id to be loaded from persistence storage
 
 
     public ShowItemPage(PageParameters parameters) {
@@ -45,7 +47,7 @@ public class ShowItemPage extends BasePage {
         setStatelessHint(true);
         try {
             item = ItemType.valueOf(parameters.get(ITEM).toString());
-            id = parameters.get(ID).toLongObject();
+            id = new ObjectId(parameters.get(ID).toString());
         } catch (Exception e) {
             item = null;
             id = null;
@@ -61,12 +63,12 @@ public class ShowItemPage extends BasePage {
         Object o = null;
         if (null != item) {
             if (ItemType.vacancy.equals(item)) {
-                o = service.get(Vacancy.class, id);
+                o = service.findOne(id, Vacancy.class);
                 if (null != o) {
                     add(new VacancyPanel("panel", new CompoundPropertyModel<>(o)));
                 }
             } else {
-                o = service.get(Person.class, id);
+                o = service.findOne(id, Person.class);
                 if (null != o) {
                     add(new PersonPanel("panel", new CompoundPropertyModel<>(o)));
                 }

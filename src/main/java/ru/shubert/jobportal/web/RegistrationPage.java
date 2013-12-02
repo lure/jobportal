@@ -12,8 +12,8 @@ import org.apache.wicket.validation.validator.StringValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.shubert.jobportal.model.User;
-import ru.shubert.jobportal.model.prototype.RoleEnum;
-import ru.shubert.jobportal.service.IAccountService;
+import ru.shubert.jobportal.model.RoleEnum;
+import ru.shubert.jobportal.service.UserService;
 import ru.shubert.jobportal.web.component.CancelButton;
 import ru.shubert.jobportal.web.component.HighlightUtils;
 import ru.shubert.jobportal.web.component.SaveButton;
@@ -27,7 +27,7 @@ import ru.shubert.jobportal.web.proto.BasePage;
 public class RegistrationPage extends BasePage {
     private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationPage.class);
     @SpringBean
-    private IAccountService service;
+    private UserService service;
 
     private PasswordTextField password;
 
@@ -54,12 +54,19 @@ public class RegistrationPage extends BasePage {
 
                 if (user.getId() == null) {
                     user.setPassword(password.getModelObject());
-                    user.setLoginToken(service.getTokenGenerator().generate());
+                    user.setLoginToken(service.getGenerator().generate());
                     user.initRole();
                 }
 
                 try {
+                    if (user.getEmployer() != null) {
+                        service.save(user.getEmployer());
+                    }
+                    if (user.getPerson() != null) {
+                        service.save(user.getPerson());
+                    }
                     service.save(user);
+
                     LOGGER.info("Saved new user {}", user);
                     getSession().info(getString("status.save", getModel()));
                     JobPortalSession.get().forceAuthenticate(user);
@@ -72,16 +79,15 @@ public class RegistrationPage extends BasePage {
             }
         };
 
-        TextField<String> login = newRequiredEmailField("login", User.SHORT_STRING);
-        TextField<String> firstName = newRequiredTextField("firstName", User.SHORT_STRING);
-        TextField<String> middleName = newRequiredTextField("middleName", User.SHORT_STRING);
-        TextField<String> lastName = newRequiredTextField("lastName", User.SHORT_STRING);
+        TextField<String> login = newRequiredEmailField("login", User.LONG_STRING);
+        TextField<String> firstName = newRequiredTextField("firstName", User.LONG_STRING);
+        TextField<String> middleName = newRequiredTextField("middleName", User.LONG_STRING);
+        TextField<String> lastName = newRequiredTextField("lastName", User.LONG_STRING);
         //DropDownChoice<RoleEnum> role = dropDownForEnum("role", RoleEnum.class, this);
 
         RadioGroup<RoleEnum> role = new RadioGroup<>("role");
         role.add(new Radio<>("PERSON", Model.of(RoleEnum.PERSON)));
         role.add(new Radio<>("EMPLOYER", Model.of(RoleEnum.EMPLOYER)));
-
 
 
         // Passwords. if id == null, they are required. Else - null-valued password fields leads to keep password
@@ -90,8 +96,8 @@ public class RegistrationPage extends BasePage {
         //password.add(new PatternValidator(PASSWORD_PATTERN));
         PasswordTextField passwordConfirmation = new PasswordTextField("password-confirmation", Model.of(""));
         if (formModel.getObject().getId() != null) {
-            passwordConfirmation.setRequired(false).add(StringValidator.lengthBetween(User.SMALL_STRING, User.SHORT_STRING));
-            password.setRequired(false).add(StringValidator.lengthBetween(User.SMALL_STRING, User.SHORT_STRING));
+            passwordConfirmation.setRequired(false).add(StringValidator.lengthBetween(User.LONG_STRING, User.LONG_STRING));
+            password.setRequired(false).add(StringValidator.lengthBetween(User.LONG_STRING, User.LONG_STRING));
         }
 
         // VALIDATION

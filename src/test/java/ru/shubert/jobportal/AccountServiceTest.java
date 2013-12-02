@@ -1,76 +1,59 @@
 package ru.shubert.jobportal;
 
-import junit.framework.Assert;
+import org.apache.commons.io.FileUtils;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.util.Assert;
 import org.testng.annotations.Test;
+import ru.shubert.jobportal.config.AppConfig;
+import ru.shubert.jobportal.config.MongoConfig;
+import ru.shubert.jobportal.config.WebConfig;
 import ru.shubert.jobportal.model.User;
-import ru.shubert.jobportal.model.employer.Employer;
-import ru.shubert.jobportal.model.person.Person;
-import ru.shubert.jobportal.model.prototype.RoleEnum;
-import ru.shubert.jobportal.preset.TransactionalTestWithContext;
-import ru.shubert.jobportal.service.IAccountService;
+import ru.shubert.jobportal.model.employer.Vacancy;
+import ru.shubert.jobportal.service.MongoService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
-/**
- * User: user
- * Date: 29.04.12 17:49
- */
+@ContextConfiguration(classes = {WebConfig.class, AppConfig.class, MongoConfig.class})
+public class AccountServiceTest extends AbstractTestNGSpringContextTests {
 
+    @Resource(name = "baseService")
+    private MongoService service;
 
-@Test
-public class AccountServiceTest extends TransactionalTestWithContext {
+    @Resource
+    private MongoTemplate template;
 
-    @Resource()
-    private IAccountService service;
-
-
-    public void loadingExistingUserMustSucceed() {
-        Object p = service.get(User.class, 1L);
-        Assert.assertNotNull(p);
+    @Test
+    public void checkInitialData() {
+        List<User> users = template.findAll(User.class);
+        Assert.notEmpty(users);
     }
 
-    public void loadingEmployerMustSucceed() {
-        Employer p = service.get(Employer.class, 1L);
-        Assert.assertNotNull(p);
+    @Test
+    public void findTest() {
+        /*
+        Criteria criteria = Criteria.where("position").regex(".*lish.*", "i");
+        System.out.println("\nfindTest output");
+        for (Vacancy o : template.find(new Query(criteria), Vacancy.class)) {
+            System.out.println(o.getPosition());
+        }
+        */
+
+        Criteria criteria = Criteria.where("position").is("стоматолог");
+        for (Vacancy o : template.find(new Query(criteria), Vacancy.class)) {
+            System.out.println(o.getDescription());
+        }
+
+
+//        DBCollection collection = template.getDb().getCollection("vacancy");
+//        BasicDBObject query = new BasicDBObject();
+//        pattern = Pattern.compile(".*мато.*", Pattern.UNICODE_CHARACTER_CLASS);
+//        query.put("position", pattern);
+//        query.put("position", "стоматолог");
+//        System.out.println("--" + collection.find(query).count() + "--  " + collection.find(query));
     }
-
-    public void getEmployerOnEmployerUserMustSucceed() {
-        User p = service.get(User.class, 1L);
-        Assert.assertNotNull(p);
-        Assert.assertNotNull(p.getEmployer());
-    }
-
-    @Test(expectedExceptions = NullPointerException.class)
-    public void userInitRoleMustThrowExceptionOnNullRole() {
-        User user = new User();
-        //noinspection ConstantConditions
-        user.setRole(null);
-        user.initRole();
-    }
-
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void userInitRoleMustThrowExceptionOnAdminRole() {
-        User user = new User();
-        user.setRole(RoleEnum.ADMIN);
-        user.initRole();
-    }
-
-    public void employerUserMustHaveEmployerObject() {
-        User user = new User();
-        user.setRole(RoleEnum.EMPLOYER);
-        user.initRole();
-        Assert.assertNotNull(user.getEmployer());
-    }
-
-    public void printVacancyListMustSucee(){
-        System.out.println("===================================");
-        Person e = service.get(Person.class, 1L);
-        System.out.println(e.getEducation());
-        System.out.println(e.getExperiences());
-        System.out.println("===================================");
-    }
-
-
-
-
 }

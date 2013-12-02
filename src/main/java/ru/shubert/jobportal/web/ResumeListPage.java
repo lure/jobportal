@@ -17,7 +17,7 @@ import ru.shubert.jobportal.model.person.Education;
 import ru.shubert.jobportal.model.person.EducationGrade;
 import ru.shubert.jobportal.model.person.JobExperience;
 import ru.shubert.jobportal.model.person.Person;
-import ru.shubert.jobportal.service.IAccountService;
+import ru.shubert.jobportal.service.IService;
 import ru.shubert.jobportal.web.component.BookmarkableItemLink;
 import ru.shubert.jobportal.web.panel.UserPanel;
 import ru.shubert.jobportal.web.proto.BasePage;
@@ -28,8 +28,8 @@ import java.util.List;
 
 @AuthorizeInstantiation({"EMPLOYER", "ADMIN"})
 public class ResumeListPage extends BasePage {
-    @SpringBean
-    IAccountService service;
+    @SpringBean(name="baseService")
+    IService service;
 
     private Object originalState;
 

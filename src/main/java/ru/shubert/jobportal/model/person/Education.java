@@ -1,27 +1,25 @@
 package ru.shubert.jobportal.model.person;
 
-import ru.shubert.jobportal.model.prototype.AbstractEntity;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import ru.shubert.jobportal.model.AbstractEntity;
 
 /**
  * Single education line. Collection of them is held by a person and may be used in a search
  */
-@Entity
-public class Education extends AbstractEntity {
+@Document
+public class Education extends AbstractEntity{
 
-    @Enumerated
+    @Transient
+    Person person;
+
     private EducationGrade grade;
 
-    @Column
     private Integer end;
 
-    @Column(length = LONG_STRING)
     private String place;
 
-    @Column(length = LONG_STRING)
     private String speciality;
 
 
@@ -55,5 +53,13 @@ public class Education extends AbstractEntity {
 
     public void setSpeciality(String speciality) {
         this.speciality = speciality;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }

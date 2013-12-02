@@ -1,9 +1,11 @@
 package ru.shubert.jobportal.model.person;
 
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import ru.shubert.jobportal.model.AbstractEntity;
 import ru.shubert.jobportal.model.Currency;
-import ru.shubert.jobportal.model.prototype.AbstractEntity;
 
-import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -11,22 +13,22 @@ import java.util.Date;
  * Date: 29.04.12 17:24
  */
 
-@Entity
-public class JobExperience extends AbstractEntity {
+@Document
+public class JobExperience extends AbstractEntity{
 
-    @Column(length = LONG_STRING)
+    @Transient
+    Person person;
+
     private String company;
 
     private Date start;
 
     private Date end;
 
-    @Column(length = LONG_STRING)
     private String position;
 
     private Integer salary;
 
-    @Enumerated(value = EnumType.STRING)
     private Currency currency;
 
     public String getCompany() {
@@ -75,5 +77,13 @@ public class JobExperience extends AbstractEntity {
 
     public void setCurrency(Currency currency) {
         this.currency = currency;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }

@@ -1,0 +1,183 @@
+{
+    "user":[
+        {
+            "_class":"ru.shubert.jobportal.model.User",
+            "_id":{
+                "$oid":"50003d6ed3e483296c5cb43b"
+            },
+            "login":"admin",
+            "role":"ADMIN",
+            "password":"123",
+            "firstName":"Фиксированная",
+            "middleName":"Администраторская",
+            "lastName":"Запись",
+
+            "employer":{
+                "$ref":"employer",
+                "$id":{
+                    "$oid":"50003d6ed3e483296c5cb43a"
+                }
+            },
+            "person":{
+                "$ref":"person",
+                "$id":{
+                    "$oid":"50003d6ed3e483296c5cb439"
+                }
+            }
+
+        },
+        {
+            "_class":"ru.shubert.jobportal.model.User",
+            "_id":{
+                "$oid":"50003d6ed3e483296c5cb43d"
+            },
+            "login":"employer@employer.ru",
+            "role":"EMPLOYER",
+            "password":"123",
+            "firstName":"Романенко",
+            "middleName":"Виктор",
+            "lastName":"Юрьевич",
+
+            "employer":{
+                "$ref":"employer",
+                "$id":{
+                    "$oid":"50003d6ed3e483296c5cb43c"
+                }
+            }
+        },
+        {
+            "_class":"ru.shubert.jobportal.model.User",
+            "_id":{
+                "$oid":"50003d6ed3e483296c5cb441"
+            },
+            "login":"person@person.ru",
+            "role":"PERSON",
+            "password":"123",
+            "firstName":"Несторенко",
+            "middleName":"Михаил",
+            "lastName":"Петрович",
+
+            "person":{
+                "$ref":"person",
+                "$id":{
+                    "$oid":"50003d6ed3e483296c5cb442"
+                }
+            }
+        }
+    ],
+    "employer":[
+        {
+            "_class":"ru.shubert.jobportal.model.employer.Employer",
+            "_id":{
+                "$oid":"50003d6ed3e483296c5cb43a"
+            },
+            "description":"Одно из лучших и достойнейших мест работы для одаренных студентов и начинающих разработчиков. Толко здесь вы сможете получить бесценный опыт.",
+            "name":"Легенда Текнолоджи",
+            "url":"http://legend.ru",
+            "vacancies":[
+                {
+                    "$ref":"vacancy",
+                    "$id":{
+                        "$oid":"500c13e8d3e4f93b939d5a65"
+                    }
+                }
+            ]
+        },
+        {
+            "_class":"ru.shubert.jobportal.model.employer.Employer",
+            "_id":{
+                "$oid":"50003d6ed3e483296c5cb43c"
+            },
+            "description":"ОТР (Организационно-Технологические Решения) – ведущая российская консалтинговая компания в сфере информационных технологий и системной интеграции, специализирующаяся на предоставлении комплексных ИТ-решений для финансовых организаций, государственных структур и предприятий индустрии.",
+            "name":"OTR ltd",
+            "url":"http://otr.ru",
+            "vacancies":[
+                {
+                    "$ref":"vacancy",
+                    "$id":{
+                        "$oid":"50003d6ed3e483296c5cb440"
+                    }
+                }
+            ]
+        }
+    ],
+    "person":[
+        {
+            "_class":"ru.shubert.jobportal.model.person.Person",
+            "_id":{
+                "$oid":"50003d6ed3e483296c5cb439"
+            },
+            "address":"Володарский переулок дом 16",
+            "available":true,
+            "currency":"euro",
+            "salary":15000,
+            "position":"Младший грузчик",
+            "education":[
+                {
+                    "_id":{
+                        "$oid":"500c0c2dd3e4fa1afee431a2"
+                    },
+                    "grade":"middle",
+                    "end":2900,
+                    "place":"Государственный университет экономики и управления",
+                    "speciality":"Государственное управление"
+                }
+            ],
+            "experiences":[
+                {
+                    "_id":{
+                        "$oid":"500c0c70d3e4fa1afee431a3"
+                    },
+                    "company":"Cinema Rectangle vision",
+                    "start":{
+                        "$date":1341950400000
+                    },
+                    "end":{
+                        "$date":1343678400000
+                    },
+                    "position":"Режиссер",
+                    "salary":4500,
+                    "currency":"euro"
+                }
+            ],
+            "description":"For performance reasons, it's always preferential to minimize the load placed on a system's memory. As such, most associations are set to a FetchType of LAZY. This is especially true for one to many and many to many relationships, where the impact of loading a large number of associated properties can be significant."
+        },
+        {
+            "_class":"ru.shubert.jobportal.model.person.Person",
+            "_id":{
+                "$oid":"50003d6ed3e483296c5cb442"
+            },
+            "address":"Ломоносовский проспект дом 4 офис 15",
+            "available":true,
+            "currency":"euro",
+            "salary":50000,
+            "position":"Руководитель отдела продаж",
+            "description":"First step is defining which lifecycle management strategy is required for your tests."
+        }
+    ],
+    "vacancy":[
+        {
+            "_class":"ru.shubert.jobportal.model.employer.Vacancy",
+            "_id":{
+                "$oid":"50003d6ed3e483296c5cb440"
+            },
+            "description":"Работа в офисе на матросской заставе полный рабочий день",
+            "education":"none",
+            "position":"стоматолог",
+            "salary":10233,
+            "currency":"rouble"
+        },
+        {
+            "_class":"ru.shubert.jobportal.model.employer.Vacancy",
+            "_id":{
+                "$oid":"500c13e8d3e4f93b939d5a65"
+            },
+            "description":"Под катом частичная загрузка объектов, поиск объекта по элементу вложенного в него массива и немного идентификаторов",
+            "education":"none",
+            "position":"Manager assistant",
+            "salary":30000,
+            "currency":"rouble"
+        }
+
+    ]
+}

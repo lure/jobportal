@@ -18,7 +18,6 @@ import java.util.Iterator;
  * It's mission is to provide filtered and sorted cortege. Sorting and pagination set in {@link QueryParams} class
  * while current filter state is held by {@link IFilterStateLocator} implementation.
  * In short, search is done by example which is initialized cortege object.
- *
  */
 public class SortableFilteredDataProvider<T> extends SortableDataProvider<T> implements IFilterStateLocator<T> {
 
@@ -26,7 +25,7 @@ public class SortableFilteredDataProvider<T> extends SortableDataProvider<T> imp
 
     private T filter;
 
-    private QueryParams params;
+    private QueryParams params = new QueryParams(0, 20);
 
     private IService service;
 
@@ -64,7 +63,7 @@ public class SortableFilteredDataProvider<T> extends SortableDataProvider<T> imp
      * @return total item count
      */
     public int size() {
-        return service.countByExample(WicketObjects.cloneModel(filter)).intValue();
+        return (int) service.count(WicketObjects.cloneModel(filter));
     }
 
     /**
@@ -75,12 +74,7 @@ public class SortableFilteredDataProvider<T> extends SortableDataProvider<T> imp
      * @return iterator capable of iterating over {first, first+count} items
      */
     public Iterator<? extends T> iterator(int first, int count) {
-        // view frame
-        if (params == null) {
-            params = new QueryParams(first, count);
-        } else {
-            params.setFirst(first).setCount(count);
-        }
+        params.setFirst(first).setCount(count);
         // Sorting parameters: fields and direction
         SortParam sp = getSort();
         if (sp != null) {
@@ -90,7 +84,7 @@ public class SortableFilteredDataProvider<T> extends SortableDataProvider<T> imp
 
         // It's guaranteed that returned object is of type of T
         // noinspection unchecked
-        return service.find((T)WicketObjects.cloneModel(filter), params).iterator();
+        return service.find((T) WicketObjects.cloneModel(filter), params).iterator();
     }
 
 

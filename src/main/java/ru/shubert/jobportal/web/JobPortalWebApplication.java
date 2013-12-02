@@ -55,8 +55,9 @@ public class JobPortalWebApplication extends AuthenticatedWebApplication {
         mountPage("/person", PersonPage.class);
         mountPage("/employer", EmployerPage.class);
         mountPage("/control", ControlPanelPage.class);
-        mountPage("/vacancy", VacancyListPage.class);
-        mountPage("/resume", ResumeListPage.class);
+
+        mount(new MountedMapperWithoutPageComponentInfo("/vacancy", VacancyListPage.class));
+        mount(new MountedMapperWithoutPageComponentInfo("/resume", ResumeListPage.class));
         mount(new MountedMapperWithoutPageComponentInfo("/show", ShowItemPage.class));
         //mountPage("/show", ShowItemPage.class);   http://stackoverflow.com/questions/8602489/delete-version-number-in-url
     }

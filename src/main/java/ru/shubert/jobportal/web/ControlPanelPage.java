@@ -15,7 +15,7 @@ import org.apache.wicket.validation.IValidatable;
 import org.apache.wicket.validation.validator.AbstractValidator;
 import org.apache.wicket.validation.validator.StringValidator;
 import ru.shubert.jobportal.model.User;
-import ru.shubert.jobportal.service.IAccountService;
+import ru.shubert.jobportal.service.UserService;
 import ru.shubert.jobportal.web.component.HighlightUtils;
 import ru.shubert.jobportal.web.component.SaveButton;
 import ru.shubert.jobportal.web.panel.UserPanel;
@@ -28,7 +28,7 @@ import ru.shubert.jobportal.web.proto.BasePage;
 @AuthorizeInstantiation({"ADMIN", "PERSON", "EMPLOYER"})
 public class ControlPanelPage extends BasePage {
     @SpringBean
-    private IAccountService service;
+    private UserService service;
 
     private PasswordTextField password;
 
@@ -44,14 +44,14 @@ public class ControlPanelPage extends BasePage {
             @Override
             protected void onSubmit() {
                 super.onSubmit();
-                service.saveUser(getModelObject());
+                service.save(getModelObject());
                 JobPortalSession.get().getUserModel().detach();
                 getSession().info(getString("status.save", getModel()));
                 setResponsePage(HomePage.class);
             }
         };
 
-        TextField<String> login = newRequiredEmailField("login", User.SHORT_STRING);
+        TextField<String> login = newRequiredEmailField("login", User.LONG_STRING);
         TextField<String> firstName = newRequiredTextField("firstName", User.SHORT_STRING);
         TextField<String> middleName = newRequiredTextField("middleName", User.SHORT_STRING);
         TextField<String> lastName = newRequiredTextField("lastName", User.SHORT_STRING);
@@ -69,7 +69,7 @@ public class ControlPanelPage extends BasePage {
                 super.onSubmit();
                 User user = getModelObject();
                 user.setPassword(password.getModelObject());
-                service.saveUser(user);
+                service.save(user);
                 getSession().info(getString("status.save", getModel()));
                 setResponsePage(HomePage.class);
             }

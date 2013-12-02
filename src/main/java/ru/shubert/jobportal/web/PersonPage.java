@@ -11,7 +11,10 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.apache.wicket.model.*;
+import org.apache.wicket.model.AbstractReadOnlyModel;
+import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator;
 import ru.shubert.jobportal.model.Currency;
@@ -19,7 +22,8 @@ import ru.shubert.jobportal.model.User;
 import ru.shubert.jobportal.model.person.Education;
 import ru.shubert.jobportal.model.person.JobExperience;
 import ru.shubert.jobportal.model.person.Person;
-import ru.shubert.jobportal.service.IAccountService;
+import ru.shubert.jobportal.service.MongoService;
+import ru.shubert.jobportal.service.UserService;
 import ru.shubert.jobportal.web.component.CancelButton;
 import ru.shubert.jobportal.web.component.EmailPropertyLink;
 import ru.shubert.jobportal.web.component.HighlightUtils;
@@ -37,8 +41,12 @@ import ru.shubert.jobportal.web.proto.BasePage;
 @AuthorizeInstantiation({"PERSON", "ADMIN"})
 public class PersonPage extends BasePage {
     //private static final Logger LOGGER = LoggerFactory.getLogger(PersonPage.class);
+
+    @SpringBean(name="baseService")
+    private MongoService personService;
+
     @SpringBean
-    private IAccountService service;
+    private UserService userService;
 
     public PersonPage() {
         super();
@@ -47,8 +55,7 @@ public class PersonPage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        final User user = service.get(User.class, JobPortalSession.get().getUser().getId());
-        service.reconnect(user);
+        final User user = userService.findOne(JobPortalSession.get().getUser().getId(), User.class);
 
         final IModel<Person> formModel = new CompoundPropertyModel<>(user.getPerson());
         final CompoundPropertyModel<User> userModel = new CompoundPropertyModel<>(user);
@@ -61,8 +68,16 @@ public class PersonPage extends BasePage {
             @Override
             protected void onSubmit() {
                 super.onSubmit();
-//                service.save(userModel.getObject());
-                service.save(user);
+                Person person = getModelObject();
+
+                for (Education e: person.getEducation())
+                    personService.save(e);
+
+                for (JobExperience j: person.getExperiences())
+                    personService.save(j);
+
+                personService.save(person);
+                userService.save(user);
                 getSession().info(getString("status.save", getModel()));
                 setResponsePage(HomePage.class);
             }

@@ -1,34 +1,30 @@
 package ru.shubert.jobportal.model.employer;
 
+import org.springframework.data.annotation.Persistent;
+import org.springframework.data.annotation.Transient;
+import ru.shubert.jobportal.model.AbstractEntity;
 import ru.shubert.jobportal.model.Currency;
 import ru.shubert.jobportal.model.person.EducationGrade;
-import ru.shubert.jobportal.model.prototype.AbstractEntity;
 
-import javax.persistence.*;
 
 /**
  * Требование к послужному списку - описывается просто опытом работы.
  */
 
-
-@Entity
+@Persistent
 public class Vacancy extends AbstractEntity {
-    @ManyToOne
+
+    @Transient
     Employer employer;
 
-    @Column(length = LONG_STRING)
     private String position;
 
-    @Column(length = 2048)
     private String description;
 
-    @Column
     private Integer salary;
 
-    @Enumerated(EnumType.STRING)
     private Currency currency;
 
-    @Enumerated(EnumType.STRING)
     private EducationGrade education;
 
     public Employer getEmployer() {

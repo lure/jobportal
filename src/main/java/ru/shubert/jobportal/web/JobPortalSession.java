@@ -13,9 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.util.CookieGenerator;
 import org.springframework.web.util.WebUtils;
+import ru.shubert.jobportal.model.RoleEnum;
 import ru.shubert.jobportal.model.User;
-import ru.shubert.jobportal.model.prototype.RoleEnum;
-import ru.shubert.jobportal.service.IAccountService;
+import ru.shubert.jobportal.service.UserService;
 import ru.shubert.jobportal.web.strategy.DetachableEntityModel;
 
 import javax.servlet.http.Cookie;
@@ -45,7 +45,7 @@ public class JobPortalSession extends AuthenticatedWebSession {
     final static private CookieGenerator USERIDCOOKIE_GENERATOR;
 
     @SpringBean
-    static private IAccountService service;
+    static private UserService service;
 
     static {
         TOKENCOOKIE_GENERATOR = new CookieGenerator();
@@ -79,40 +79,26 @@ public class JobPortalSession extends AuthenticatedWebSession {
         Cookie userIdCookie = WebUtils.getCookie(getHttpRequest(), COOKIE_USERID);
 
         if (tokenCookie != null && userIdCookie != null) {
-            Long userId;
-            final String loginToken = tokenCookie.getValue();
-            try {
-                userId = Long.valueOf(userIdCookie.getValue());
-            } catch (NumberFormatException e) {
-                LOGGER.debug("signInByCookie cannot convert loginId:" + e.getMessage());
-                userId = null;
+            User user = service.findByIdAndLoginToken(userIdCookie.getValue(), tokenCookie.getValue());
+            signIn(user != null);
+            setUser(user);
+            if (user == null) {
+                clearCookie();
             }
-
-            if (loginToken != null && userId != null) {
-                final User user = service.findByToken(loginToken);
-                if (user != null && user.getId().equals(userId)) {
-                    signIn(true);
-                    setUser(user);
-                    return;
-                }
-            }
-            clearCookie();
         }
 
     }
 
     /**
-     * TODO: It strongly necessary to rewrite that pretty simple code with salted password
-     *
      * @param username received from http request
      * @param password received from http request
      * @return true if user with such credentials exists
      */
     @Override
     public boolean authenticate(final String username, final String password) {
-        User user = service.findByLogin(username);
-        if (user != null && user.getPassword().equals(password)) {
-            user.setLoginToken(service.getTokenGenerator().generate());
+        User user = service.findByLoginAndPassword(username, password);
+        if (user != null) {
+            user.setLoginToken(service.getGenerator().generate());
             service.save(user);
 
             USERIDCOOKIE_GENERATOR.addCookie(getHttpResponse(), user.getId().toString());
