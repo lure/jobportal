@@ -13,13 +13,12 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- *
  * Difference with {@link org.apache.wicket.markup.html.list.ListView} is:
  * <ol>
  * <li> operates on the {@link EditableListItem} which allows to change it's index.
  * <p/>
  * <li> raises visibility of {@link #newItem(int)} and {@link #populateItem(EditableListItem)} methods to public
- * hence now list may be used in ajax enviroment in scenariossuch as
+ * hence now list may be used in ajax environment in scenarios such as
  * <pre><code>
  * ListItem item = {@link #newItem(int)};
  * {@link #populateItem(EditableListItem)};
@@ -105,7 +104,7 @@ public abstract class EditableListView<T> extends AbstractRepeater {
      * If true re-rendering the list view is more efficient if the windows doesn't get changed at
      * all or if it gets scrolled (compared to paging). But if you modify the listView model object,
      * than you must manually call listView.removeAll() in order to rebuild the ListItems. If you
-     * nest a ListView in a Form, ALLWAYS set this property to true, as otherwise validation will
+     * nest a ListView in a Form, ALWAYS set this property to true, as otherwise validation will
      * not work properly.
      *
      * @return Whether to reuse items
@@ -372,7 +371,7 @@ public abstract class EditableListView<T> extends AbstractRepeater {
         };
     }
 
-    @SuppressWarnings({"unchecked"})
+
     @Override
     public Iterator<Component> iterator() {
         return super.iterator();
@@ -383,8 +382,9 @@ public abstract class EditableListView<T> extends AbstractRepeater {
      *
      * @return model
      */
-    @SuppressWarnings("unchecked")
+
     public final IModel<? extends List<T>> getModel() {
+        //noinspection unchecked
         return (IModel<? extends List<T>>) getDefaultModel();
     }
 
@@ -402,8 +402,8 @@ public abstract class EditableListView<T> extends AbstractRepeater {
      *
      * @return model object
      */
-    @SuppressWarnings("unchecked")
     public final List<T> getModelObject() {
+        //noinspection unchecked
         return (List<T>) getDefaultModelObject();
     }
 
@@ -419,7 +419,7 @@ public abstract class EditableListView<T> extends AbstractRepeater {
 
 
     /**
-     * Appends an object to the view and sublayered ModelObject collection
+     * Appends an object to the view and underlay ModelObject collection
      *
      * @param object to be added
      * @return newly created Item
@@ -435,7 +435,7 @@ public abstract class EditableListView<T> extends AbstractRepeater {
     /**
      * removes an Item from the view and it's model object from the underlayed
      * model object collection.
-     * Items following removed one gettheis index (not 'id') decreased by one
+     * Items following removed one get their index (not 'id') decreased by one
      * The index of removed item is determined by {@link EditableListItem#getIndex()}
      * @param item to be removed
      */

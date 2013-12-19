@@ -7,8 +7,8 @@
     <F_USER ID="1" emp_fk="1" pers_fk="1" login="admin" logintoken="" password="123" role="ADMIN" firstname="Фиксированная" middlename="Администраторская" lastname="Запись"/>
 
     <!--USER_ID="1"-->
-    <F_EMPLOYER ID="2" DESCRIPTION="ОТР (Организационно-Технологические Решения) – ведущая российская консалтинговая компания в сфере информационных технологий и системной интеграции, специализирующаяся на предоставлении комплексных ИТ-решений для финансовых организаций, государственных структур и предприятий индустрии."
-                NAME="OTR ltd" url="otr.ru" />
+    <F_EMPLOYER ID="2" DESCRIPTION="Ornamental Games – разработчик игр."
+                NAME="OG ltd" url="og.ru" />
     <F_VACANCY ID="3" EMPLOYER_ID="2"  DESCRIPTION="Работа в офисе на матросской заставе полный рабочий день" EDUCATION="none"  POSITION="Стоматолог" SALARY="10233" currency="rouble" />
     <F_USER ID="3" emp_fk="2" login="employer@employer.ru" logintoken="" password="123" role="EMPLOYER" />
     <!--USER_ID="3"-->

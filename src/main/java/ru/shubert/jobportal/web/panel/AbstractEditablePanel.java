@@ -23,7 +23,7 @@ import java.util.List;
  * Base class for editable panel list.
  * <ul>
  * <li>populate panel with {@link #onPopulatePanel(ru.shubert.jobportal.web.repeater.EditableListItem)}</li>
- * <li>reimplement if necessary onClick logic for a new panel creation in
+ * <li>reimplement onClick if necessary for a new panel creation in
  * {@link #onAddPanelClick(org.apache.wicket.ajax.AjaxRequestTarget, org.apache.wicket.markup.html.form.Form)}.
  * By default it creates new block(consider to add abstract method which returns tag name)
  * element row and calls onPopulateItem</li>
@@ -31,7 +31,7 @@ import java.util.List;
  * <p/>
  * Please use {@link #newRemoveItemButton(String, ru.shubert.jobportal.web.repeater.EditableListItem)} if in need of item remove button
  * You have access to Container, ListView and Button vie respectful getters.
- * Hierarhy: container->(ListView->(n)Panel + Button)
+ * Hierarchy: container->(ListView->(n)Panel + Button)
  */
 public abstract class AbstractEditablePanel<T> extends FormComponentPanel<Collection<T>> {
     public static String REMOVEITEMJSCRIPT = "var item=Wicket.$('%s'); if (item.parentNode.tagName == 'TBODY')" +
@@ -182,7 +182,7 @@ public abstract class AbstractEditablePanel<T> extends FormComponentPanel<Collec
     }
 
     /**
-     * Is called from the Add button handler and returns new object. This object may be transfered to some
+     * Is called from the Add button handler and returns new object. This object may be transferred to some
      * modal window where his fields may be set.
      *
      * @return newly created object.
@@ -190,7 +190,7 @@ public abstract class AbstractEditablePanel<T> extends FormComponentPanel<Collec
     protected abstract T newObject();
 
     /**
-     * Depends on markup in your template. Ususally it convenient to use 'div' but html5 recommend
+     * Depends on markup in your template. Usually it convenient to use 'div' but html5 recommend
      * 'block' instead
      *
      * @return child wrapper tag name

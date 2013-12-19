@@ -6,7 +6,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 
 /**
- *  TODO it is unecessary complicate. getObject must be populated via reading getParent(Repeater.class).getModelObjcet.get(getIndex())
+ *  TODO it is unnecessarily complicate. getObject must be populated via reading getParent(Repeater.class).getModelObjcet.get(getIndex())
  *  This implementation already has setOutputMarkupId set to true
  *
  */
